@@ -44,7 +44,20 @@ class Technology(models.Model):
         """String for representing the Model object."""
         return self.name    
 
+class Producer(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular producer')
+    name = models.CharField(max_length=200)
+    description = models.TextField(max_length=1000, help_text='Enter a description of the producer')
 
+    ROLE = (
+        ('e', 'Entertaining video'),
+        ('l', 'Lessons'),
+        ('b', 'Both'),
+    )
+        
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.name
 
 
 
@@ -82,20 +95,7 @@ class Video(models.Model):
         """Returns the url to access this video."""
         return reverse('video-link', args=[str(self.id)])
 
-class Producer(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular producer')
-    name = models.CharField(max_length=200)
-    description = models.TextField(max_length=1000, help_text='Enter a description of the producer')
 
-    ROLE = (
-        ('e', 'Entertaining video'),
-        ('l', 'Lessons'),
-        ('b', 'Both'),
-    )
-        
-    def __str__(self):
-        """String for representing the Model object."""
-        return self.name
 
 class Course(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text='Unique ID for this particular course')
@@ -149,12 +149,12 @@ class Algorithm(models.Model):
         return self.name
 
 class Pupil(models.Model):
-    user =  models.ForeignKey(help_text="Which user have this child")
+    user =  models.CharField(max_length=200, help_text="Which user have this child")
     name = models.CharField(max_length=200, help_text="Name of this child")
     date_of_birth = models.DateField(null=True, blank=True)  
-    completed_courses = models.ManyToManyField()
-    current_lessons = models.ManyToManyField() # Theorethically possible to study some courses simultaneously. Quite enough to store only current lesson cause course can be defined automatically
-    planned_courses = models.ManyToManyField()
+    completed_courses = models.ManyToManyField(Course, related_name='completed_courses')
+    current_lessons = models.ManyToManyField(Lesson) # Theorethically possible to study some courses simultaneously. Quite enough to store only current lesson cause course can be defined automatically
+    planned_courses = models.ManyToManyField(Course, related_name='planned_courses')
     image = models.ImageField(max_length=100, help_text='Upload avatar for this pupil')
     
     GENDER = (
