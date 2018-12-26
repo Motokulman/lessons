@@ -140,6 +140,9 @@ class Course(models.Model):
     recommended_age_to = models.TimeField()
     algorithm = models.ForeignKey('Algorithm', on_delete=models.SET_NULL, null=True, help_text="Algorithm for pithing this course")
     image = models.ImageField(max_length=100, help_text='Upload preview for this course')
+    teaching_language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True, related_name='teaching_language', help_text='Select a language of teaching')
+    is_language = models.BooleanField(default=False, help_text='Is this course for study language?')
+    target_language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True, related_name='target_language', help_text='Select a target language, if this is language course')
     
 
     def __str__(self):
