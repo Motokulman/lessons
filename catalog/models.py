@@ -10,13 +10,36 @@ class Genre(models.Model):
         """String for representing the Model object."""
         return self.name
 
+class Country(models.Model):
+    """Model representing a book genre."""
+    name = models.CharField(max_length=200, help_text='Enter a country')
+        
+    def __str__(self):
+        """String for representing the Model object."""
+        return self.name
+
 class Language(models.Model):
     """Model representing a book genre."""
     name = models.CharField(max_length=200, help_text='Enter a language')
+    country = models.ForeignKey('Country', on_delete=models.SET_NULL, null=True, help_text="Related country for this language")
+   
+    LANGUAGE_STATUS = (
+        ('o', 'Official language'),
+        ('r', 'Regional language'),
+    )
+            
+    status = models.CharField(
+        max_length=1,
+        choices=LANGUAGE_STATUS,
+        blank=True,
+        default='o',
+        help_text="Is this language official for this country or it regional",
+    )
     
     def __str__(self):
         """String for representing the Model object."""
         return self.name
+
 
 
 class Serial(models.Model):
@@ -54,7 +77,15 @@ class Producer(models.Model):
         ('l', 'Lessons'),
         ('b', 'Both'),
     )
-        
+            
+    status = models.CharField(
+        max_length=1,
+        choices=ROLE,
+        blank=True,
+        default='e',
+        help_text="Do you produce entertaining video, lessons video or both",
+    )
+
     def __str__(self):
         """String for representing the Model object."""
         return self.name
@@ -63,7 +94,7 @@ class Producer(models.Model):
 
 
 class CourseType(models.Model):
-    name = models.TextField(max_length=100)
+    name = models.CharField(max_length=100)
     ancestor_type = models.TextField(max_length=100)
     image = models.ImageField(max_length=100, help_text='Upload preview for this CourseType')
     
@@ -156,6 +187,8 @@ class Pupil(models.Model):
     current_lessons = models.ManyToManyField(Lesson) # Theorethically possible to study some courses simultaneously. Quite enough to store only current lesson cause course can be defined automatically
     planned_courses = models.ManyToManyField(Course, related_name='planned_courses')
     image = models.ImageField(max_length=100, help_text='Upload avatar for this pupil')
+    native_language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+    country = models.ForeignKey('Country', on_delete=models.SET_NULL, null=True, help_text="Your country uses for defining official and regional languages in your location")
     
     GENDER = (
         ('b', 'Boy'),
