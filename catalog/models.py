@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse # Used to generate URLs by reversing the URL patterns
 import uuid # Required for unique instances
+from mptt.models import MPTTModel, TreeForeignKey # for hierarchical data
 
 class Genre(models.Model):
     """Model representing a book genre."""
@@ -90,17 +91,20 @@ class Producer(models.Model):
         """String for representing the Model object."""
         return self.name
 
+class CourseType(MPTTModel):
+    name = models.CharField(max_length=100, unique=True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    image = models.ImageField(max_length=100, null=True, help_text='Upload preview for this CourseType')
 
 
+    class MPTTMeta:
+        order_insertion_by = ['name']
 
-class CourseType(models.Model):
-    name = models.CharField(max_length=100)
-    ancestor_type = models.TextField(max_length=100)
-    image = models.ImageField(max_length=100, help_text='Upload preview for this CourseType')
-    
-    def __str__(self):
+    #def __str__(self):
         """String for representing the Model object."""
-        return self.name
+       # return self.name
+
+
         
 class Video(models.Model):
     """Model representing a entertaining video (not a lesson video)."""
