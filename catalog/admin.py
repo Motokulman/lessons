@@ -1,9 +1,10 @@
 from django.contrib import admin
-from catalog.models import Genre, Language, Serial, Logia, Technology, Producer, CourseType, Video, Course, Lesson, Algorithm, Pupil
+from catalog.models import Genre, Language, Serial, Logia, Technology, Producer, CourseType, Video, Course, Lesson, Algorithm, Pupil, Country
 from mptt.admin import MPTTModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 
 admin.site.register(Genre)
+admin.site.register(Country)
 admin.site.register(Language)
 admin.site.register(Serial)
 admin.site.register(Technology)

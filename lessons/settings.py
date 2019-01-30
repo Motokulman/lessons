@@ -126,3 +126,5 @@ STATIC_URL = '/static/'
 #You can change the indent pixels per level globally by putting this in your settings.py:
 # default is 10 pixels 
 #MPTT_ADMIN_LEVEL_INDENT = 20
+
+LOGIN_REDIRECT_URL = '/'
