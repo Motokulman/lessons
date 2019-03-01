@@ -1,0 +1,53 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <ul>
+    <p><strong>Videos:</strong> {{ num_videos }}</p>
+    <a href="">View all videos</a>
+    <p><strong>Courses:</strong> {{ num_courses }}</p>
+    <a href="">View all courses</a>
+  </ul>
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/app.css' %}"> 
+
+      <title>Minimal Preroll Example</title>
+      <link rel="stylesheet" href="{% static 'node_modules/video.js/dist/video-js.css' %}">
+      <script src="{% static 'node_modules/video.js/dist/video.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'videojs-contrib-ads-master/dist/videojs-contrib-ads.css' %}">
+      <script src="{% static 'videojs-contrib-ads-master/dist/videojs-contrib-ads.js' %}"></script>
+    </head>
+    <body>
+    
+      <h1>Minimal Preroll Example</h1>
+    
+      <p>This page uses the built files, so you must do a local build before the example will work.</p>
+    
+      <video
+        id="examplePlayer"
+        class="video-js vjs-default-skin"
+        width="640"
+        height="264"
+        poster="http://vjs.zencdn.net/v/oceans.png"
+        controls>
+        <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
+        <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+        <source src="http://vjs.zencdn.net/v/oceans.ogv" type='video/ogg' />
+      </video>
+
+      
+  <h2>Events</h2>
+
+  <ol class="log"></ol>
+    
+      <script src="{% static 'js/example-plugin.js' %}"></script>
+      <script src="{% static 'js/app.js' %}"></script>
+
+
+
+
+{% endblock %}
+
+
