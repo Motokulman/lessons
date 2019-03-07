@@ -121,10 +121,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/inserty/lessons/lessons/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "catalog/static"),
+   
+]
+
+STATIC_ROOT = "lessons/lessons/static/"
 
 #You can change the indent pixels per level globally by putting this in your settings.py:
 # default is 10 pixels 
 #MPTT_ADMIN_LEVEL_INDENT = 20
 
 LOGIN_REDIRECT_URL = '/'
+
+ALLOWED_HOSTS = ['xn--h1aiiik.xn--p1ai']
