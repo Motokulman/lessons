@@ -1,51 +1,29 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <ul>
-    <p><strong>Videos:</strong> {{ num_videos }}</p>
-    <a href="">View all videos</a>
-    <p><strong>Courses:</strong> {{ num_courses }}</p>
-    <a href="">View all courses</a>
-  </ul>
 
-
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> 
-    <link rel="stylesheet" href="{% static 'css/app.css' %}"> 
-
-      <title>Minimal Preroll Example</title>
-      <link rel="stylesheet" href="{% static 'node_modules/video.js/dist/video-js.css' %}">
-      <script src="{% static 'node_modules/video.js/dist/video.js' %}"></script>
-      <link rel="stylesheet" href="{% static 'videojs-contrib-ads-master/dist/videojs-contrib-ads.css' %}">
-      <script src="{% static 'videojs-contrib-ads-master/dist/videojs-contrib-ads.js' %}"></script>
-    </head>
-    <body>
-    
-      <h1>Minimal Preroll Example</h1>
-    
-      <p>This page uses the built files, so you must do a local build before the example will work.</p>
-    
-      <video
-        id="examplePlayer"
-        class="video-js vjs-default-skin"
-        width="640"
-        height="264"
-        poster="http://vjs.zencdn.net/v/oceans.png"
-        controls>
-        <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
-        <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
-        <source src="http://vjs.zencdn.net/v/oceans.ogv" type='video/ogg' />
-      </video>
-
-      
-  <h2>Events</h2>
-
-  <ol class="log"></ol>
-    
-      <script src="{% static 'js/example-plugin.js' %}"></script>
-      <script src="{% static 'js/app.js' %}"></script>
-
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+<div class="container">
+	<div class="row justify-content-center">
+    <div class="col-12 col-md-12">
+      <form name="search" >  <!-- class="card card-sm" -->
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col">
+            <input name="key" class="form-control form-control-lg form-control-borderless" type="text" placeholder="Поиск по YouTube"/>
+          </div>
+          <div class="col-auto">
+            <button id="search" class="btn btn-lg" ><i class="fas fa-search "></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="myvideo" class="col-12 myvideo"  hidden="true">
+      <div id="player"></div>
+      <div id="playerLesson" hidden="true"></div>
+    </div>
+  </div>
+<div class="row justify-content-center" id="search-result"></div> 
+</div>
 
 
 {% endblock %}
