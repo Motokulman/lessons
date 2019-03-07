@@ -18,6 +18,24 @@ def index(request):
 
     return render(request, 'index.html', context=context)
 
+def about(request):
+    """View function for about page"""
+
+    context = {
+
+    }
+
+    return render(request, 'about.html', context=context)
+
+def user(request):
+    """View function for user page"""
+
+    context = {
+
+    }
+
+    return render(request, 'user.html', context=context)
+
 
 class VideoListView(generic.ListView):
     model = Video
