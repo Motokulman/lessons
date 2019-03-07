@@ -344,29 +344,12 @@ var s =  vidId;// + '?rel=0';
       }
 
     var searchButton = document.getElementById("search");
+    console.log("searchButton = " + searchButton);
     searchButton.addEventListener("click", function (e) {
 
         defineSearch();
     });
     
-    var devButton = document.getElementById("dev");
-    devButton.addEventListener("click", function (e) {
-        playerTag.hidden = true;
-        //console.log(player.getIframe());
-        console.log(playerTag.hidden);
-
-    });    
-    
-    var dev2Button = document.getElementById("dev2");
-    dev2Button.addEventListener("click", function (e) {
-       // player.pauseVideo();
-  //     console.log(playerTag);
-    //   var playerTag = document.getElementById(player.getIframe().id);
-       playerTag.hidden = false;
-     //  console.log(playerTag);
-       console.log(playerTag.hidden);
-
-    });
 
   /***** END BOILERPLATE CODE *****/
 

@@ -121,14 +121,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/inserty/lessons/lessons/static/'
+STATIC_URL = '/inserty/lessons/catalog/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "catalog/static"),
    
 ]
 
-STATIC_ROOT = "lessons/lessons/static/"
+STATIC_ROOT = "lessons/catalog/static/"
 
 #You can change the indent pixels per level globally by putting this in your settings.py:
 # default is 10 pixels 
