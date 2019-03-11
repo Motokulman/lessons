@@ -6,6 +6,17 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import permission_required
 
+#new user creation
+from django.views.generic.edit import FormView
+from django.contrib.auth.forms import UserCreationForm
+#and this too
+from catalog.forms import CustomSignUpForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.shortcuts import render
+from django.shortcuts import HttpResponseRedirect
+from django.contrib import auth
+
 def index(request):
     """View function for home page"""
     num_videos = Video.objects.all().count()
@@ -48,6 +59,55 @@ class PupilsCustomerListView(generic.ListView):
 
     def get_queryset(self):
         return Pupil.objects.filter(customer=self.request.user)
+
+#new user form
+class RegisterFormView(FormView):
+    form_class = UserCreationForm
+
+    # Ссылка, на которую будет перенаправляться пользователь в случае успешной регистрации.
+    # В данном случае указана ссылка на страницу входа для зарегистрированных пользователей.
+    success_url = "/login/"
+
+    # Шаблон, который будет использоваться при отображении представления.
+    template_name = "register.html"
+
+    def form_valid(self, form):
+        # Создаём пользователя, если данные в форму были введены корректно.
+        form.save()
+
+        # Вызываем метод базового класса
+        return super(RegisterFormView, self).form_valid(form)
+
+#new user form2
+def signup(request):
+    if request.method == 'POST':
+        form = CustomSignUpForm(request.POST)
+        if form.is_valid():
+            #form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            email = form.cleaned_data.get('email')
+            # Create user and save to the database
+            user = User.objects.create_user(username, email, password)
+            user.save()
+            user = authenticate(username=username, password=password)
+            auth.login(request, user)
+            #return redirect('index')
+            if user is not None:
+                return render(request, 'index.html') 
+            else:
+                return HttpResponse("fail")
+            #return render(request, 'index.html')           
+    else:
+        form = CustomSignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+
+
+
+
+
+
 
 # class SubmittedCoursesByPeopleListView(LoginRequiredMixin,generic.ListView):
 #     """Generic class-based view listing courses on submit to current user's pupil."""

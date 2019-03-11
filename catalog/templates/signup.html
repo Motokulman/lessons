@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<script src="https://yastatic.net/share2/share.js" async="async"></script>
+<script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js" async="async"></script>
+<script src="//yastatic.net/share2/share.js" async="async"></script>
+
+  <h2>Регистрация</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <span>{{ field.help_text }}</span>
+        {% endif %}
+        {% for error in field.errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <div>Поделиться в любой соцсети * (обязательно)</div>
+    <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,viber,whatsapp,telegram" data-title="Для детей! Сайт с мультиками, только вместо рекламы - уроки английского!" 
+    data-url="xn--h1aiiik.xn--p1ai" data-access-token:facebook="fb-token"></div>
+    <br>
+    <button type="submit">Отправить</button>
+  </form>
+    
+{% endblock %}
