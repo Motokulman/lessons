@@ -136,4 +136,4 @@ STATIC_ROOT = "lessons/catalog/static/"
 
 LOGIN_REDIRECT_URL = '/'
 
-#ALLOWED_HOSTS = ['xn--h1aiiik.xn--p1ai']
+ALLOWED_HOSTS = ['xn--h1aiiik.xn--p1ai', 'surpriselesson.com']
